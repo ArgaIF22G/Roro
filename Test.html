@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Untuk Roro</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(120deg, #ff9ce3, #ff61c7, #ffb3e8);
+        background-size: 400% 400%;
+        animation: bgMove 8s infinite alternate;
+        font-family: "Poppins", sans-serif;
+        overflow-x: hidden;
+        text-align: center;
+        color: white;
+    }
+
+    @keyframes bgMove {
+        0% {background-position: 0% 50%;}
+        100% {background-position: 100% 50%;}
+    }
+
+    .title {
+        font-size: 32px;
+        font-weight: bold;
+        padding-top: 40px;
+        text-shadow: 0 0 10px #fff, 0 0 30px #ff00ee;
+        animation: glow 1.8s infinite alternate;
+    }
+
+    @keyframes glow {
+        0% { text-shadow: 0 0 10px #fff; }
+        100% { text-shadow: 0 0 30px #ff00ee; }
+    }
+
+    .sub {
+        margin-top: 8px;
+        font-size: 18px;
+        opacity: 0.9;
+    }
+
+    /* Animasi pelukan */
+    .hug-container {
+        margin-top: 40px;
+        font-size: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .boy {
+        animation: boyMove 2s infinite ease-in-out;
+    }
+
+    @keyframes boyMove {
+        0% { transform: translateX(0); }
+        50% { transform: translateX(40px) rotate(-5deg); }
+        100% { transform: translateX(0); }
+    }
+
+    .girl {
+        animation: girlMove 2s infinite ease-in-out;
+    }
+
+    @keyframes girlMove {
+        0% { transform: translateX(0); }
+        50% { transform: translateX(-40px) rotate(5deg); }
+        100% { transform: translateX(0); }
+    }
+
+    /* HEART jatuh */
+    .floating-heart {
+        position: fixed;
+        top: -50px;
+        font-size: 30px;
+        animation: fall 4s linear infinite;
+        opacity: 0.7;
+        pointer-events: none;
+    }
+
+    @keyframes fall {
+        0% { transform: translateY(-50px) rotate(0deg); }
+        100% { transform: translateY(120vh) rotate(360deg); }
+    }
+
+    /* HEART MELEDAK SAAT DITEKAN */
+    .boom {
+        position: absolute;
+        font-size: 25px;
+        animation: boomAnim 0.5s forwards;
+        pointer-events: none;
+    }
+
+    @keyframes boomAnim {
+        0% { transform: scale(0); opacity: 1; }
+        100% { transform: scale(3); opacity: 0; }
+    }
+
+    /* HEART BERPUTAR */
+    .spin-heart {
+        font-size: 50px;
+        margin-top: 30px;
+        animation: spin 3s infinite linear;
+    }
+
+    @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    /* Sticker lucu */
+    .sticker {
+        margin-top: 20px;
+        font-size: 80px;
+        animation: bounce 2s infinite ease-in-out;
+    }
+
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-15px); }
+    }
+
+    /* Tombol pesan manis */
+    .btn {
+        margin-top: 25px;
+        background: #fff;
+        color: #ff2bb5;
+        padding: 10px 22px;
+        border-radius: 30px;
+        border: none;
+        font-size: 18px;
+        font-weight: bold;
+        box-shadow: 0 0 10px #ff4ec9;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .btn:hover {
+        transform: scale(1.1);
+    }
+
+    .popup {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(255, 255, 255, 0.9);
+        color: #ff2bb5;
+        padding: 12px 20px;
+        border-radius: 20px;
+        font-size: 18px;
+        display: none;
+        box-shadow: 0 0 20px #ff2bb5;
+    }
+</style>
+</head>
+
+<body>
+
+<!-- MUSIK -->
+<audio autoplay loop>
+    <source src="https://files.catbox.moe/8t1tli.mp3" type="audio/mpeg">
+</audio>
+
+<div class="title">Semoga cepat sembuh Roro Siti Syarah 💖</div>
+<div class="sub">Kamu harus jadi preman lagi seperti biasanya 😎💗</div>
+
+<!-- Animasi Pelukan -->
+<div class="hug-container">
+    <div class="boy">👦</div>
+    <div style="width:20px;"></div>
+    <div class="girl">👧</div>
+</div>
+
+<!-- Heart berputar -->
+<div class="spin-heart">💞</div>
+
+<!-- Sticker lucu -->
+<div class="sticker">🐰✨</div>
+
+<!-- Tombol pesan manis -->
+<button class="btn" onclick="showMessage()">Klik Aku 💌</button>
+
+<div class="popup" id="popupMessage">
+    Kamu itu temen spesial banget tau 😳💗
+</div>
+
+<script>
+    /* LOVE jatuh */
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.classList.add("floating-heart");
+        heart.innerHTML = "💗";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+    }
+    setInterval(createHeart, 300);
+
+    /* Love meledak saat ditekan */
+    document.addEventListener("click", function(e) {
+        const boom = document.createElement("div");
+        boom.classList.add("boom");
+        boom.innerHTML = "💖";
+        boom.style.left = e.pageX + "px";
+        boom.style.top = e.pageY + "px";
+        document.body.appendChild(boom);
+        setTimeout(() => boom.remove(), 500);
+    });
+
+    /* Pesan manis */
+    function showMessage() {
+        const msg = document.getElementById("popupMessage");
+        msg.style.display = "block";
+        setTimeout(() => { msg.style.display = "none"; }, 2500);
+    }
+</script>
+
+</body>
+</html>
